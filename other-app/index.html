@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Ecomm App</title>
+    </head>
+    <body>
+        <h1>E-commerce App</h1>
+        <label for="search">Search</label>
+        <input type="text" id="search" onkeyup="searchDatabase()" />
+
+        <!-- <div id="item-list">
+            <button id="addBtn">Add to Cart</button>
+        </div> -->
+
+        
+        <table id="myTable">
+        <tr class="header">
+            <th style="width:20%;">Items</th>
+        </tr>
+        <tr>
+           <td>rice</td>
+        </tr>
+        <tr>
+            <td>oil</td>
+        </tr>
+        <tr>
+            <td>bajra</td>
+        </tr>
+        </table>
+
+        <script>
+            function getData(){
+                // let data=[
+                //     {id: 1, itemName: 'rice'},
+                //     {id: 2, itemName: 'wheat flour'}, 
+                //     {id: 3, itemName: 'horlicks'},
+                //     {id: 4, itemName: 'ghee'},
+                //     {id: 5, itemName: 'bajra'},
+                //     {id: 6, itemName: 'mustard oil'},
+                //     {id: 7, itemName: 'salt'}
+                // ]
+                table = document.getElementById("myTable");
+                tr = table.getElementsByTagName("tr");
+                // let listContainer = document.getElementById('item-list');
+                let input = document.getElementById("search");
+                for(let i = 0; i < tr.length; i++){
+                    td = tr[i].getElementsByTagName("td")[0];
+                    console.log(tr[i])
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.indexOf(input.value) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                } 
+            }
+
+            const doDebounce = function(fn, d){
+                let timer;
+                return function(){
+                    let context = this,
+                        args = arguments;
+                    clearTimeout(timer);
+                    timer = setTimeout(() => {
+                        getData.apply(context, args);
+                    }, d)
+                }
+            }
+
+           const searchDatabase = doDebounce(getData, 300);
+        </script>
+    </body>
+</html>
