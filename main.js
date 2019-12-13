@@ -4,7 +4,8 @@ import state from "./model.js";
 
 const actions = {
   INTIAL_ITEMS_LOADED: "INTIAL_ITEMS_LOADED",
-  FILTER_BY_BRAND: "FILTER_BY_BRAND"
+  FILTER_BY_BRAND: "FILTER_BY_BRAND",
+  SORT_BY_PRICE: "SORT_BY_PRICE"
 };
 
 const app = {
@@ -15,7 +16,11 @@ const app = {
     });
   },
   getCheckboxValue(value) {
+    // console.log({ e });
     controller({ action: "FILTER_BY_BRAND", payload: value });
+  },
+  sortByPrice(preference) {
+    controller({ action: "SORT_BY_PRICE", payload: preference });
   }
 };
 

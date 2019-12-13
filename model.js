@@ -2,7 +2,8 @@ const state = {
   women: {
     categoryName: "Women",
     itemsLoaded: false,
-    filterByBrand: "All",
+    sortByPrice: "",
+    filterByBrand: ["All"],
     items: [
       {
         itemImage:
@@ -51,6 +52,16 @@ const state = {
         itemName: "Women Embroidered Anarkali Kurta  (Dark Blue)",
         itemBrand: "Janakdulari Creation",
         itemPrice: "499",
+        itemSizes: ["S", "M", "L", "XL", "XXL"],
+        color: "Dark Blue",
+        inStock: true
+      },
+      {
+        itemImage:
+          "https://rukminim1.flixcart.com/image/540/648/jua4djk0/kurta/s/y/p/xxl-sns0321blue-style-n-shades-original-imafffuy3as4zwb2.jpeg?q=50",
+        itemName: "Women Straight Cotton Kurta  (Dark Blue)",
+        itemBrand: "Style N Shades",
+        itemPrice: "309",
         itemSizes: ["S", "M", "L", "XL", "XXL"],
         color: "Dark Blue",
         inStock: true
