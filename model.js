@@ -6,6 +6,8 @@ const state = {
     filterByBrand: ["All"],
     updateByPrice: "690",
     updateByColor: ["All"],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "All"],
+    updateBySize: ["All"],
     items: [
       {
         itemImage: "flipkart1.jpeg",
@@ -22,7 +24,7 @@ const state = {
           "Women Printed Straight Cotton Rayon Blend Kurta  (Dark Blue)",
         itemBrand: "Style N Shades",
         itemPrice: "303",
-        itemSizes: ["S", "M", "L", "XL", "XXL"],
+        itemSizes: ["S", "M", "L", "XL"],
         color: "Dark Blue",
         inStock: true
       },
@@ -31,7 +33,7 @@ const state = {
         itemName: "Women Embroidered Flared Rayon Kurta  (Dark Blue)",
         itemBrand: "Janakdulari Creation",
         itemPrice: "499",
-        itemSizes: ["S", "M", "L", "XL", "XXL"],
+        itemSizes: ["S", "M", "L", "XXL"],
         color: "Dark Blue",
         inStock: true
       },
@@ -40,7 +42,7 @@ const state = {
         itemName: "Women Embroidered Flared Silk Kurta  (Light Blue)",
         itemBrand: "Janakdulari Creation",
         itemPrice: "409",
-        itemSizes: ["S", "M", "L", "XL", "XXL"],
+        itemSizes: ["XS", "S", "M", "L", "XL", "XXL"],
         color: "Light Blue",
         inStock: true
       },

@@ -8,7 +8,8 @@ const actions = {
   FILTER_BY_BRAND: "FILTER_BY_BRAND",
   SORT_BY_PRICE: "SORT_BY_PRICE",
   UPDATE_BY_PRICE: "UPDATE_BY_PRICE",
-  UPDATE_BY_COLOR: "UPDATE_BY_COLOR"
+  UPDATE_BY_COLOR: "UPDATE_BY_COLOR",
+  UPDATE_BY_SIZE: "UPDATE_BY_SIZE"
 };
 
 export default function controller({ action, payload }) {
@@ -30,6 +31,7 @@ export default function controller({ action, payload }) {
       break;
 
     case actions.FILTER_BY_BRAND:
+      console.log(state.women.filterByBrand);
       if (state.women.filterByBrand.includes(payload)) {
         state.women.filterByBrand = state.women.filterByBrand.filter(
           brand => brand !== payload
@@ -63,6 +65,25 @@ export default function controller({ action, payload }) {
         );
       } else {
         state.women.updateByColor.push(payload);
+      }
+      render();
+      break;
+
+    case actions.UPDATE_BY_SIZE:
+      if (state.women.updateBySize.includes(payload)) {
+        state.women.updateBySize = state.women.updateBySize.filter(
+          size => size !== payload
+        );
+      } else if (
+        state.women.updateBySize.includes("All") &&
+        payload !== "All"
+      ) {
+        state.women.updateBySize.push(payload);
+        state.women.updateBySize = state.women.updateBySize.filter(
+          size => size !== "All"
+        );
+      } else {
+        state.women.updateBySize.push(payload);
       }
       render();
       break;

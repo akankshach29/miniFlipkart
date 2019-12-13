@@ -7,7 +7,8 @@ const actions = {
   FILTER_BY_BRAND: "FILTER_BY_BRAND",
   SORT_BY_PRICE: "SORT_BY_PRICE",
   UPDATE_BY_PRICE: "UPDATE_BY_PRICE",
-  UPDATE_BY_COLOR: "UPDATE_BY_COLOR"
+  UPDATE_BY_COLOR: "UPDATE_BY_COLOR",
+  UPDATE_BY_SIZE: "UPDATE_BY_SIZE"
 };
 
 const app = {
@@ -27,8 +28,10 @@ const app = {
     controller({ action: "UPDATE_BY_PRICE", payload: price });
   },
   updateByColor(color) {
-    console.log(color);
     controller({ action: "UPDATE_BY_COLOR", payload: color });
+  },
+  updateBySize(size) {
+    controller({ action: "UPDATE_BY_SIZE", payload: size });
   }
 };
 

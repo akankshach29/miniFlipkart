@@ -51,7 +51,7 @@ export default function render() {
                         <input 
                           type="checkbox" 
                           name="colors" 
-                          value=${color}
+                          value="${color}"
                           ${
                             state.women.updateByColor.includes(color)
                               ? "checked"
@@ -59,6 +59,27 @@ export default function render() {
                           }
                           onclick="app.updateByColor(value)"
                         />${color}
+                      </label><br>`;
+              })
+              .join("")}
+        </form>
+        <hr>
+        <h4>Size</h4>
+        <form>
+            ${state.women.sizes
+              .map(size => {
+                return `<label>
+                        <input 
+                          type="checkbox" 
+                          name="sizes" 
+                          value="${size}"
+                          ${
+                            state.women.updateBySize.includes(size)
+                              ? "checked"
+                              : null
+                          }
+                          onclick="app.updateBySize(value)"
+                        />${size}
                       </label><br>`;
               })
               .join("")}
@@ -83,7 +104,8 @@ export default function render() {
                 if (
                   state.women.filterByBrand[
                     state.women.filterByBrand.length - 1
-                  ] === "All"
+                  ] === "All" ||
+                  state.women.filterByBrand.length === 0
                 ) {
                   return true;
                 }
@@ -99,11 +121,25 @@ export default function render() {
                 if (
                   state.women.updateByColor[
                     state.women.updateByColor.length - 1
-                  ] === "All"
+                  ] === "All" ||
+                  state.women.updateByColor.length === 0
                 ) {
                   return true;
                 }
                 return state.women.updateByColor.includes(item.color);
+              })
+              .filter(item => {
+                if (
+                  state.women.updateBySize[
+                    state.women.updateBySize.length - 1
+                  ] === "All" ||
+                  state.women.updateBySize.length === 0
+                ) {
+                  return true;
+                }
+                return state.women.updateBySize.forEach(
+                  size => item.itemSizes.includes(size) === true
+                );
               })
               .map(item => {
                 return `<div class="item-style">
