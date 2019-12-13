@@ -6,7 +6,9 @@ import render from "./miniFlipkart.js";
 const actions = {
   INTIAL_ITEMS_LOADED: "INTIAL_ITEMS_LOADED",
   FILTER_BY_BRAND: "FILTER_BY_BRAND",
-  SORT_BY_PRICE: "SORT_BY_PRICE"
+  SORT_BY_PRICE: "SORT_BY_PRICE",
+  UPDATE_BY_PRICE: "UPDATE_BY_PRICE",
+  UPDATE_BY_COLOR: "UPDATE_BY_COLOR"
 };
 
 export default function controller({ action, payload }) {
@@ -14,6 +16,16 @@ export default function controller({ action, payload }) {
     case actions.INTIAL_ITEMS_LOADED:
       state.women.items = payload;
       state.women.itemsLoaded = true;
+      render();
+      break;
+
+    case actions.SORT_BY_PRICE:
+      state.women.sortByPrice = payload;
+      render();
+      break;
+
+    case actions.UPDATE_BY_PRICE:
+      state.women.updateByPrice = payload;
       render();
       break;
 
@@ -36,9 +48,21 @@ export default function controller({ action, payload }) {
       render();
       break;
 
-    case actions.SORT_BY_PRICE:
-      if (payload) {
-        state.women.sortByPrice = payload;
+    case actions.UPDATE_BY_COLOR:
+      if (state.women.updateByColor.includes(payload)) {
+        state.women.updateByColor = state.women.updateByColor.filter(
+          color => color !== payload
+        );
+      } else if (
+        state.women.updateByColor.includes("All") &&
+        payload !== "All"
+      ) {
+        state.women.updateByColor.push(payload);
+        state.women.updateByColor = state.women.updateByColor.filter(
+          color => color !== "All"
+        );
+      } else {
+        state.women.updateByColor.push(payload);
       }
       render();
       break;

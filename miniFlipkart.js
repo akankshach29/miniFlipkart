@@ -5,37 +5,9 @@ const brands = [
   ...new Set(state.women.items.map(item => item.itemBrand)),
   "All"
 ];
-// function calculateCheckbox() {
-//   let el = document.getElementById("filters");
-//   let checkboxes = el !== null ? el.getElementsByTagName("input") : "";
-//   for (let i = 0; i < checkboxes.length; i++) {
-//     if (checkboxes[i].type === "checkbox") {
-//       checkboxes[i].addEventListener("change", function(e) {
-//         console.log(this.checked);
-//       });
-//     }
-//   }
-// }
-// function getCheckedCheckboxesFor(checkboxName) {
-//   let checkboxes = document.querySelectorAll(
-//       'input[name="' + checkboxName + '"]:checked'
-//     ),
-//     values = [];
-//   console.log(checkboxes);
-//   Array.prototype.forEach.call(checkboxes, function(el) {
-//     values.push(el.value);
-//   });
-//   console.log(values);
-// }
-export default function render() {
-  let slider = document.getElementById("myRange");
-  // console.log(slider.value);
-  //   let output = document.getElementById("maxPrice");
-  //   output.innerText = slider.value ? slider.value : null;
+const colors = [...new Set(state.women.items.map(item => item.color)), "All"];
 
-  //   slider.oninput = () => {
-  //     output.innerHTML = this.value;
-  //   };
+export default function render() {
   document.getElementById("root").innerHTML = `
   <div class="grid-container">
     ${Loader()}
@@ -55,8 +27,7 @@ export default function render() {
                                 ? "checked"
                                 : null
                             }
-                            value="${brand}" 
-                            
+                            value="${brand}"                             
                             onclick="app.getCheckboxValue(value)"                   
                         />${brand}</label><br>`;
               })
@@ -66,9 +37,32 @@ export default function render() {
         <hr>
         <h4>Price Range</h4>
         <div class="slidecontainer">
-            <input type="range" min="500" max="2000" value="2000" class="slider" id="myRange" />
-            <p>Max Price: <span id="maxPrice"></span></p>
+            <input type="range" min="200" max="700" step="100" value=${
+              state.women.updateByPrice
+            } onchange="app.updateByPrice(value)" class="slider" id="myRange" />
+            <p>Price Range: < <span id="maxPrice"></span></p>
         </div>
+        <hr>
+        <h4>Color</h4>
+        <form>
+            ${colors
+              .map(color => {
+                return `<label>
+                        <input 
+                          type="checkbox" 
+                          name="colors" 
+                          value=${color}
+                          ${
+                            state.women.updateByColor.includes(color)
+                              ? "checked"
+                              : null
+                          }
+                          onclick="app.updateByColor(value)"
+                        />${color}
+                      </label><br>`;
+              })
+              .join("")}
+        </form>
     </div>
     <div class="grid-layout">    
         Sort By:<button onclick="app.sortByPrice('lowToHigh')">Low to High</button>
@@ -95,6 +89,22 @@ export default function render() {
                 }
                 return state.women.filterByBrand.includes(item.itemBrand);
               })
+              .filter(item => {
+                if (state.women.updateByPrice !== "") {
+                  return item.itemPrice <= state.women.updateByPrice;
+                }
+                return true;
+              })
+              .filter(item => {
+                if (
+                  state.women.updateByColor[
+                    state.women.updateByColor.length - 1
+                  ] === "All"
+                ) {
+                  return true;
+                }
+                return state.women.updateByColor.includes(item.color);
+              })
               .map(item => {
                 return `<div class="item-style">
                             <div class="item-img">
@@ -111,4 +121,6 @@ export default function render() {
         </div>
     </div>
   </div>`;
+  let sliderValue = document.getElementById("myRange").value;
+  document.getElementById("maxPrice").innerText = " INR " + sliderValue;
 }

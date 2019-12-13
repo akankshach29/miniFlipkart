@@ -5,7 +5,9 @@ import state from "./model.js";
 const actions = {
   INTIAL_ITEMS_LOADED: "INTIAL_ITEMS_LOADED",
   FILTER_BY_BRAND: "FILTER_BY_BRAND",
-  SORT_BY_PRICE: "SORT_BY_PRICE"
+  SORT_BY_PRICE: "SORT_BY_PRICE",
+  UPDATE_BY_PRICE: "UPDATE_BY_PRICE",
+  UPDATE_BY_COLOR: "UPDATE_BY_COLOR"
 };
 
 const app = {
@@ -16,11 +18,17 @@ const app = {
     });
   },
   getCheckboxValue(value) {
-    // console.log({ e });
     controller({ action: "FILTER_BY_BRAND", payload: value });
   },
   sortByPrice(preference) {
     controller({ action: "SORT_BY_PRICE", payload: preference });
+  },
+  updateByPrice(price) {
+    controller({ action: "UPDATE_BY_PRICE", payload: price });
+  },
+  updateByColor(color) {
+    console.log(color);
+    controller({ action: "UPDATE_BY_COLOR", payload: color });
   }
 };
 
@@ -30,3 +38,5 @@ function init() {
   window.app = app;
 }
 init();
+
+// document.getElementById("root").innerText = "Hi...."
